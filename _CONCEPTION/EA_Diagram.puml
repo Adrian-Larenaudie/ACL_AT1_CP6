@@ -1,0 +1,81 @@
+@startuml
+' hide the spot
+' hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity Section {
+ * id_Section: number <<generated>>
+ ---
+ * name: string
+ ---
+ * id_Role_Permission_Section: number <<FK>>
+}
+
+entity Role_Permission_Section {
+ * id_Role: number <<generated>>
+ ---
+ * id_Role: number <<FK>>
+ * id_Permission: number <<FK>>
+ * id_Section: number <<FK>>
+}
+
+entity Permission {
+ * id_Permission: number <<generated>>
+ ---
+ * name: string
+ ---
+ * id_Role_Permission_Section: number <<FK>>
+}
+
+entity Role {
+ * id_Role : number <<generated>>
+---
+ * name: string
+---
+ * id_Role_Permission_Section: number <<FK>>
+}
+
+entity User_Role {
+ * id_User_Role : number <<generated>>
+---
+ * id_Role: number <<FK>>
+ * id_User: number <<FK>>
+}
+
+entity User {
+ * id_User :number <<generated>>
+---
+ * name: string
+ * description: string
+}
+
+entity Book {
+ * id_Book: number <<generated>>
+ ---
+ * name: string
+ * author: string
+}
+
+entity Music {
+ * id_Music: number <<generated>>
+ ---
+ * title: string
+ * compositor: string
+}
+
+entity Movie {
+ * id_Movie: number <<generated>>
+ ---
+ * title: string
+ * director: string
+}
+
+Section ||--o{ Role_Permission_Section
+Permission ||--o{ Role_Permission_Section
+Role ||--o{ Role_Permission_Section
+Role ||--o{ User_Role
+User ||--o{ User_Role
+
+@enduml
